@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui" />
+    <title>Predicting Meme Coin Rugs – Youssif Seisa</title>
+    <link type="text/css" rel="stylesheet" href="./css/github-markdown.css" />
+    <link type="text/css" rel="stylesheet" href="./css/pilcrow.css" />
+    <link type="text/css" rel="stylesheet" href="./css/hljs-github.min.css" />
+    <style>
+      /* Two-column layout for the Dataset section */
+      .two-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        align-items: start;
+      }
+      /* Grid for charts: two columns by default */
+      .chart-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      /* Full width for overall returns */
+      .full-row {
+        grid-column: 1 / -1;
+      }
+      figure {
+        margin: 0;
+      }
+      figcaption {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="markdown-body">
+      <nav>
+        <a href="index.html">&larr; Home</a>
+      </nav>
+      <h1>Predicting Meme Coin Rugs (collaborator: Alex Bloom) </h1>
+
+      <section id="dataset">
+        <h2>Dataset &amp; Features</h2>
+        <div class="two-column">
+          <div>
+            <ul>
+              <li>Over 20,000 coins are launched daily on Solana, with ~1,000 migrating each day.</li>
+              <li>Data compiled for every single coins that migrated during the Sept 2024 – March 2025 period.</li>
+              <li>Features include minute-by-minute OHLCV for the first 10 hours, market data (Bitcoin and Solana), and background on coin creators.</li>
+            </ul>
+          </div>
+          <div>
+            <figure>
+              <img src="src/distribution.png" alt="Coin Distribution by Month" style="width: 100%; height: auto;" />
+              <figcaption>Coin Distribution by Month</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="methodology">
+        <h2>Methodology</h2>
+        <ul>
+          <li>Coins are labeled safe (class 1) if they maintain at least 95% of their value from minute 30 to 600.</li>
+          <li>Data split: Training (56%), Validation (29%), Testing (15%).</li>
+          <li>Models tested: AdaBoost, Custom Ensemble, Neural Network, modified LSTM, and an LSTM Ensemble.</li>
+          <li>The LSTM Ensemble—combining 5 tuned LSTMs via majority voting—delivered the best performance.</li>
+        </ul>
+      </section>
+
+      <section id="results">
+        <h2>Results</h2>
+        <ul>
+          <li>Baseline: 0.23 precision; average return: -46%.</li>
+          <li>AdaBoost: 0.48 precision; average return: -1%.</li>
+          <li>Custom Ensemble: 0.51 precision; average return: +1%.</li>
+          <li>Neural Network: 0.34 precision; average return: -19%.</li>
+          <li>LSTM: 0.62 precision; average return: +6%.</li>
+          <li>LSTM Ensemble: 0.68 precision; average return: +11%.</li>
+        </ul>
+        <div class="chart-grid">
+          <figure class="full-row">
+            <img src="src/overall_returns.jpeg" alt="Overall Returns Comparison" style="width: 100%; height: auto;" />
+            <figcaption>Average Returns of Coins Predicted by Each Model</figcaption>
+          </figure>
+        </div>
+      </section>
+    </article>
+  </body>
+</html>
